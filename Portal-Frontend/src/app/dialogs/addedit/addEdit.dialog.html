@@ -1,0 +1,48 @@
+<div class="container">
+  <h3 mat-dialog-title>
+    <span *ngIf="data.model.id">Edit</span>
+    <span *ngIf="!data.model.id">Add New</span>
+  </h3>
+
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <textarea matInput #input class="form-control" placeholder="NIC" maxlength="10" [(ngModel)]="data.model.candidateId" name="candidateId" required ></textarea>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <textarea matInput #input class="form-control" placeholder="Name" maxlength="30" [(ngModel)]="data.model.name" name="name" required ></textarea>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <mat-select [(value)]="data.model.symbol" placeholder="Select Symbol" required>
+            <mat-option *ngFor="let symbol of ['KITE','TIGER','BAT','ARROW']" [value]="symbol">
+                {{symbol}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    </div>    
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <mat-select [(value)]="data.model.constituency" placeholder="Select Region" required>
+            <mat-option *ngFor="let region of data.regions" [value]="region">
+                {{region}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    </div>    
+
+    <div mat-dialog-actions>
+      <button mat-button [type]="submit" [disabled]="!formControl.valid" (click)="onYesClick()">Save</button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,34 @@
+/**
+ * Write your model definitions here
+ */
+
+namespace org.acme.votenetwork
+
+participant Voter identified by nic {
+  o String nic
+  o String name
+  o String constituency
+  o Boolean voted default = false 
+}
+
+asset Candidate identified by candidateId {
+  o String candidateId
+  o String name
+  o String constituency
+  o String password default = "123"
+  o Integer votes default = 0
+  o Symbols symbol
+}
+
+enum Symbols {
+	o KITE
+  o TIGER
+  o BAT
+  o ARROW
+  o BOOK
+}
+
+transaction MakeVote {
+  --> Voter voter
+  --> Candidate candidate
+}

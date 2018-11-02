@@ -1,0 +1,65 @@
+<mat-toolbar color="primary">
+    <mat-form-field *ngIf="authData && authData.is_admin">
+        <mat-select (selectionChange)="refreshData()" [(value)]="selectedRegion" placeholder="Select Region">
+            <mat-option *ngFor="let region of regions" [value]="region">
+                {{region}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <span class="spacer"></span>
+    <span *ngIf="authData && !authData.is_admin">Region: {{selectedRegion}}</span>
+    <span class="spacer"></span>
+    Reload data:
+    <button mat-icon-button (click)="refreshData()">
+        <mat-icon>refresh</mat-icon>
+    </button>
+</mat-toolbar>
+<div>
+    <mat-card class="card-result" *ngFor="let candidate of candidates | orderBy: ['-votes']">{{candidate.name}}<br />{{candidate.votes}}</mat-card>
+</div>
+<div *ngIf="selectedRegion && authData && authData.is_admin" style="clear:both" class="container mat-elevation-z8">
+
+    <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+
+        <ng-container matColumnDef="candidateId">
+            <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.candidateId}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="symbol">
+            <mat-header-cell *matHeaderCellDef>Symbol</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.symbol}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+                <button mat-icon-button color="primary" (click)="addNew()">
+                    <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+                </button>
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let row; let i=index;">
+                <!-- <button mat-icon-button color="accent" (click)="startEdit(row)">
+                    <mat-icon aria-label="Edit">edit</mat-icon>
+                </button> -->
+
+                <button mat-icon-button color="accent" (click)="delete(row.candidateId, row.name)">
+                    <mat-icon aria-label="Delete">delete</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="['candidateId', 'name', 'symbol', 'actions']"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['candidateId', 'name', 'symbol', 'actions'];"></mat-row>
+    </mat-table>
+
+
+    <div class="no-results" [style.display]="candidates.length == 0 ? '' : 'none'">
+        No results
+    </div>
+</div>

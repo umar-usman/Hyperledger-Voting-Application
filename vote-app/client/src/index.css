@@ -1,0 +1,28 @@
+
+.login-view-background {
+    position: absolute;
+    background-image: url('/img/loginBackground.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 999;
+    top: 0;
+    left: 0;
+}
+
+.login-view {
+    position: absolute;
+    left: 20%;
+    z-index: 9999;
+    top: 50%;
+    transform: translateY(-50%);
+    backface-visibility: hidden; 
+}
+
+.background-view {   
+    background-image: url('/img/loginBackground.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
