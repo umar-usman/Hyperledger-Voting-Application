@@ -9,7 +9,7 @@ import {
   MatTableModule, MatToolbarModule, MatCard, MatCardModule, MatOptionModule, MatSelectModule,
 } from '@angular/material';
 import {DataService} from './services/data.service';
-import {AddEditDialogComponent} from './dialogs/addedit/addEdit.dialog.component';
+import {AddEditDialogComponent} from './dialogs/addedit/addedit.dialog.component';
 import {DeleteDialogComponent} from './dialogs/delete/delete.dialog.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';

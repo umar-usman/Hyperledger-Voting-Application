@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { CandidateWithVote, Auth, Candidate } from '../../../../src/app/models/candidate';
 import { MatTableDataSource, MatDialog } from '@angular/material';
 import { DeleteDialogComponent } from '../../../../src/app/dialogs/delete/delete.dialog.component';
-import { AddEditDialogComponent } from '../../../../src/app/dialogs/addedit/addEdit.dialog.component';
+import { AddEditDialogComponent } from '../../../../src/app/dialogs/addedit/addedit.dialog.component';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -17,6 +17,7 @@ export class MainComponent implements OnInit {
   regions: string[] = [];
   selectedRegion: string = null;
   candidates: CandidateWithVote[] = [];
+  candidate: Candidate = null;
   authData: Auth = null;
   dataSource = null;
 
@@ -35,9 +36,17 @@ export class MainComponent implements OnInit {
       this.regions = regions;
 
       if(this.authData.is_admin == false)
+      {
         this.selectedRegion = this.authData.constituency;
 
-      this.refreshData();
+        this.dataService.getCandidate(this.authData.id).subscribe((result) => {
+          this.candidate = result;
+
+          this.refreshData();
+        });
+      }
+      else
+        this.refreshData();
     });
   }
 
@@ -51,6 +60,11 @@ export class MainComponent implements OnInit {
           this.dataSource = new MatTableDataSource(this.candidates);
         });
       }
+  }
+
+  logout(){
+    this.dataService.logout();
+    this.router.navigateByUrl('login');
   }
 
   delete(id: string, name: string) {

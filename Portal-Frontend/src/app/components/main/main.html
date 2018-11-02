@@ -7,12 +7,15 @@
         </mat-select>
     </mat-form-field>
     <span class="spacer"></span>
-    <span *ngIf="authData && !authData.is_admin">Region: {{selectedRegion}}</span>
+    <span *ngIf="candidate">Name: {{candidate.name}}</span><span class="spacer"></span>
+    <span *ngIf="candidate">Region: {{selectedRegion}}</span><span class="spacer"></span>
+    <span *ngIf="candidate">Symbol: {{candidate.symbol}}</span><span class="spacer"></span>
     <span class="spacer"></span>
     Reload data:
     <button mat-icon-button (click)="refreshData()">
         <mat-icon>refresh</mat-icon>
     </button>
+    <button mat-stroked-button (click)="logout()" >Logout</button>
 </mat-toolbar>
 <div>
     <mat-card class="card-result" *ngFor="let candidate of candidates | orderBy: ['-votes']">{{candidate.name}}<br />{{candidate.votes}}</mat-card>
@@ -38,9 +41,7 @@
 
         <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef>
-                <button mat-icon-button color="primary" (click)="addNew()">
-                    <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-                </button>
+                <button mat-raised-button color="primary" (click)="addNew()">Add</button>
             </mat-header-cell>
 
             <mat-cell *matCellDef="let row; let i=index;">
