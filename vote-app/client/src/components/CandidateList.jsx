@@ -1,8 +1,9 @@
 import React from 'react';
-import {Client} from 'node-rest-client';
-import {_} from 'underscore';
-import {animation} from "./animation.js";
-import {URL,API} from "./const.js";
+import { Client } from 'node-rest-client';
+import { _ } from 'underscore';
+import { animation } from "./animation.js";
+import { URL, API } from "./const.js";
+import Modal2 from "./Modal"
 var client = new Client();
 var Loader = require('react-loader');
 /********************************************
@@ -19,7 +20,7 @@ export class CandidateList extends React.Component {
       voted: false,
       candidatesLoaded: false,
       voteLoaded: true,
-      transactionId : '',
+      transactionId: '',
       constituency: localStorage.getItem('constituency')
     };
     //  console.log(props.data.votedFor)
@@ -38,8 +39,8 @@ export class CandidateList extends React.Component {
     // set constituency to local storage for refresh page
     localStorage.setItem('constituency', constituency);
 
-    client.get(API+"/candidates?constituency="+constituency, function(data, response) {
-      _this.setState({candidates: data, candidatesLoaded: true}); // set the state
+    client.get(API + "/candidates?constituency=" + constituency, function (data, response) {
+      _this.setState({ candidates: data, candidatesLoaded: true }); // set the state
     });
   }
   /********************************************
@@ -54,7 +55,8 @@ export class CandidateList extends React.Component {
       voted: nextProps.data.votedFor
         ? true
         : false
-    ,transactionId:nextProps.data.transactionId? nextProps.data.transactionId : false});
+      , transactionId: nextProps.data.transactionId ? nextProps.data.transactionId : false
+    });
   }
   /********************************************
     return true if current user voted for this
@@ -82,20 +84,19 @@ export class CandidateList extends React.Component {
         "Content-Type": "application/json"
       }
     };
-    this.setState({voteLoaded: false});
+    this.setState({ voteLoaded: false });
     // Post to the vote
-    debugger;
-    client.post(API+"/makevote", args, function(data, response) {
-      _this.setState({voteLoaded: true});
+    client.post(API + "/makevote", args, function (data, response) {
+      _this.setState({ voteLoaded: true });
       if (!data.error) { // if not already voted
         // let candidateId = data.candidate.split('#')[1]; // get candidate name from data response
-        _this.setState({votedFor: candidate.name, voted: true,transactionId : data.transactionId}); // set state
+        _this.setState({ votedFor: candidate.name, voted: true, transactionId: data.transactionId }); // set state
         localStorage.setItem('voted', true); // local storage item
         localStorage.setItem('votedFor', candidate.name); // local storage item
         let allCandidates = _this.state.candidates; // candidates list from state
-        let candidateIndex = _.findIndex(allCandidates, {name: candidate.name}); // find candidate index in the  list
+        let candidateIndex = _.findIndex(allCandidates, { name: candidate.name }); // find candidate index in the  list
         (allCandidates)[candidateIndex].votes += 1; // increment vote to avoid recall the app API
-        _this.setState({candidates: allCandidates}); // update the state with updated candidate list
+        _this.setState({ candidates: allCandidates }); // update the state with updated candidate list
       }
     });
   }
@@ -144,20 +145,20 @@ export class CandidateList extends React.Component {
     };
     const _this = this;
     // map and render candidate with button , votes , name
-    return _.map((this.state.candidates), function(v, k) {
+    return _.map((this.state.candidates), function (v, k) {
       let img = "/img/" + v.name + ".png";
       return (<div className="col text-center candidate mb-4" key={k}>
         <div className={'img-block'} style={{
-            backgroundImage: "url(./img/" + v.name + ".png)"
-          }}>
-          <div className={"hover " + _this._votedFor(v.name) + " " + _this.state.voted+" "+(!_this.state.voteLoaded?'loading':'')}>
+          backgroundImage: "url(./img/" + v.name + ".png)"
+        }}>
+          <div className={"hover " + _this._votedFor(v.name) + " " + _this.state.voted + " " + (!_this.state.voteLoaded ? 'loading' : '')}>
             <Loader loaded={_this.state.voteLoaded} options={options} className="spinner">{_this._renderVoteBtn(v)}</Loader>
           </div>
         </div>
         <h2 className="text-light text-uppercase text-left mb-0">{v.name}
           <small className="float-right mt-2">{v.votes}</small>
         </h2>
-        <hr className="bg-light py-1 mt-0"/>
+        <hr className="bg-light py-1 mt-0" />
       </div>)
     })
   }
@@ -190,11 +191,15 @@ export class CandidateList extends React.Component {
         <div className="container">
           <div className="row">
             {this._renderCandidate()}
-            <div className="col-12 text-light tx">
-              <div className={(!this.state.transactionId) ? 'd-none':''}>
-              Your vote ID <small>(transaction ID)</small> : {(this.state.transactionId)?this.state.transactionId :''}
-              </div>
+            {/* <div className="col-12 text-light tx"> */}
+          </div>
+          <div className="row justify-content-between text-light tx">
+            <div className={(!this.state.transactionId) ? 'd-none' : 'col-sm'}>
+              Your vote ID <small>(transaction ID)</small> : {(this.state.transactionId) ? this.state.transactionId : ''}
             </div>
+            <div className="col-sm-auto"> 
+            <Modal2 transactionId={this.state.transactionId}
+            /> </div>
           </div>
         </div>
       </Loader>

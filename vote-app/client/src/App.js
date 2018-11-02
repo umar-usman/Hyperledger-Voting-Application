@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import {Register} from './components/Register.jsx';
-import {List} from './components/List.jsx';
+// import {List} from './components/List.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 class App extends Component {
   render() {
@@ -9,11 +9,11 @@ class App extends Component {
       <div className="App">
         <div className="container">
         <h1 className="my-4 text-uppercase text-light">
-        let's stop Rigging Using Blockchain</h1>
+        Welcome to Electoral Voting System</h1>
         <hr className="bg-light py-1"/>
         </div>
         <Register/>
-        <List/>
+        {/* <List/> */}
       </div>
     );
   }

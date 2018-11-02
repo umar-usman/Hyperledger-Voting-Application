@@ -197,7 +197,7 @@ export class Register extends React.Component {
               <hr className="bg-light py-1 mt-0" />
               <button onClick={(e) => this._logOut(e)} className="btn btn-danger float-right btn-sm">logout</button>
               <div className="mb-2 d-block">
-                <h5><span className="pt-1 d-block">{this.state.session}</span></h5>
+                <h5><span className="pt-1 d-block">{this.state.userName}</span></h5>
                 <hr className="bg-light my-2" />
               </div>
               <p>You can choose your candidate if you hadn't done yet</p>

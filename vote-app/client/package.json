@@ -13,6 +13,7 @@
     "react-dom": "^16.2.0",
     "react-flatpickr": "^3.6.4",
     "react-loader": "^2.4.3",
+    "react-modal": "^3.6.1",
     "react-scripts": "^1.1.1",
     "underscore": "^1.8.3"
   },

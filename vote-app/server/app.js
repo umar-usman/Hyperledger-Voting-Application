@@ -70,6 +70,22 @@ app.get('/candidates', (req, res) => {
   });
 })
 /*
+  get candidate
+*/
+app.get('/Candidate/:candidateId', (req, res) => {
+  client.get('http://localhost:3000/api/Candidate/' + req.params.candidateId+'', function(data, response) {
+    res.json(data);
+  });
+})
+/*
+  get vote details
+*/
+app.get('/VoteDetails/:voteId', (req, res) => {
+  client.get('http://localhost:3000/api/MakeVote/'+req.params.voteId, function(data, response) {
+    res.json(data);
+  });
+})
+/*
   get voter by id 'nic'
 */
 app.get('/voter/:id', function (req, res) {
