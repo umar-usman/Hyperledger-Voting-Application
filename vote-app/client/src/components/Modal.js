@@ -17,7 +17,7 @@ const customStyles = {
     }
 };
 
-class Modal2 extends React.Component {
+class TransactionDetailModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -40,9 +40,9 @@ class Modal2 extends React.Component {
             this.setState({ transactionObj: data }, () => {
                 client.get(API + "/Candidate/" + this.state.transactionObj.candidate.split("#")[1], (data, response) => {
                     this.setState({ candidate: data }, () => {
-                          client.get(API + "/voter/" + this.state.transactionObj.voter.split("#")[1], (data, response) => {
+                        client.get(API + "/voter/" + this.state.transactionObj.voter.split("#")[1], (data, response) => {
                             this.setState({ voter: data });
-                          });                        
+                        });
                     });
                 });
             });
@@ -61,7 +61,11 @@ class Modal2 extends React.Component {
     render() {
         return (
             <div>
-                <button className="btn btn-primary" onClick={() => { this.openModal(this.props.transactionId) }}>Open Miodal</button>
+                <button className="btn btn-primary" onClick={() => {
+                    if (this.props.transactionId) {
+                        this.openModal(this.props.transactionId)
+                    }
+                }}>Vote Details</button>
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
@@ -70,7 +74,7 @@ class Modal2 extends React.Component {
                     contentLabel="Example Modal"
                 >
                     <div className="modal-header">
-                        <h5 className="modal-title" ref={subtitle => this.subtitle = subtitle}>Modal title</h5>
+                        <h5 className="modal-title" ref={subtitle => this.subtitle = subtitle}>Vote Details</h5>
                         <button type="button" className="close" onClick={this.closeModal}>
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -94,4 +98,4 @@ class Modal2 extends React.Component {
     }
 }
 
-export default Modal2;
+export default TransactionDetailModal;

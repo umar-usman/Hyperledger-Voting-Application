@@ -6,8 +6,7 @@ import { map, mergeMap } from 'rxjs/operators';
 
 @Injectable()
 export class DataService {
-  //private readonly API_URL = 'http://localhost/';
-  private readonly API_URL = 'http://172.16.2.46:4002';  
+  private readonly API_URL = 'http://localhost:4002';  
 
   private authData: Auth = null;
 

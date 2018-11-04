@@ -3,7 +3,7 @@ import { Client } from 'node-rest-client';
 import { _ } from 'underscore';
 import { animation } from "./animation.js";
 import { URL, API } from "./const.js";
-import Modal2 from "./Modal"
+import TransactionDetailModal from "./Modal"
 var client = new Client();
 var Loader = require('react-loader');
 /********************************************
@@ -191,15 +191,14 @@ export class CandidateList extends React.Component {
         <div className="container">
           <div className="row">
             {this._renderCandidate()}
-            {/* <div className="col-12 text-light tx"> */}
           </div>
           <div className="row justify-content-between text-light tx">
             <div className={(!this.state.transactionId) ? 'd-none' : 'col-sm'}>
               Your vote ID <small>(transaction ID)</small> : {(this.state.transactionId) ? this.state.transactionId : ''}
             </div>
-            <div className="col-sm-auto"> 
-            <Modal2 transactionId={this.state.transactionId}
-            /> </div>
+            <div className="col-sm-auto">
+              <TransactionDetailModal transactionId={this.state.transactionId} />
+            </div>
           </div>
         </div>
       </Loader>

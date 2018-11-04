@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { CandidateWithVote, Auth, Candidate } from '../../../../src/app/models/candidate';
 import { MatTableDataSource, MatDialog } from '@angular/material';
 import { DeleteDialogComponent } from '../../../../src/app/dialogs/delete/delete.dialog.component';
-import { AddEditDialogComponent } from '../../../../src/app/dialogs/addedit/addedit.dialog.component';
+import { AddEditDialogComponent } from '../../../../src/app/dialogs/addedit/addEdit.dialog.component';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
