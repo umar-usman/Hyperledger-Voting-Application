@@ -30,6 +30,10 @@ On 3rd link, jump to `Step Four: Locating the certificate and private key for th
 
 # Installation:
 
+First go to the Project folder and then go to vote-network directory, and execute the following command:
+
+`npm install`
+
 `1- cd ~/fabric-dev-servers
 export FABRIC_VERSION=hlfv12
 ./startFabric.sh
@@ -43,9 +47,7 @@ export FABRIC_VERSION=hlfv12
 
 `5- composer network start --networkName vote-network --networkVersion 0.0.7 -A admin -S adminpw -c PeerAdmin@hlfv1`
 
-`6- npm install`
-
-`7- composer-rest-server -c admin@vote-network -n never -w true`
+`6- composer-rest-server -c admin@vote-network -n never -w true`
 
 # Running Nadra API: 
 
