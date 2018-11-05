@@ -49,29 +49,38 @@ export FABRIC_VERSION=hlfv12
 
 # Running Nadra API: 
 
-`1- go to the Nadra API folder and then execute the following command:
-npm install
-npm run watch`
+`1- go to the Nadra API folder and then execute the following command:`
 
-# Runing Voting Application:
+`npm install`
 
-`1- First go to server folder in vote-app and execute following command:
-npm install
-npm run watch`
+`npm run watch`
 
-`2- then to go client folder in vote-app and execute following command:
-npm install
-npm run start`
+# Running Voting Application:
+
+`1- First go to server folder in vote-app and execute following command:`
+
+`npm install`
+
+`npm run watch`
+
+`2- then to go client folder in vote-app and execute following command:`
+
+`npm install`
+
+`npm run start`
 
 # Running ECP(Election Commision Pakistan) / Candidate Portal:
 
-`1- Go to the Portal-Backend folder and then execute the following command:
-npm install
-npm run watch`
+`1- Go to the Portal-Backend folder and then execute the following command:`
+`npm install`
 
-`2- Go to the Portal-Frontend folder and then execute the following command:
-npm install
-npm run start`
+`npm run watch`
+
+`2- Go to the Portal-Frontend folder and then execute the following command:`
+
+`npm install`
+
+`npm run start`
 
 Explore and Enjoy! :)
 
