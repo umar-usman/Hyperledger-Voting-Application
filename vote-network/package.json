@@ -1,6 +1,6 @@
 {
   "name": "vote-network",
-  "version": "0.0.9",
+  "version": "1.0.0",
   "description": "vote network for vote app based on blockchain",
   "scripts": {
     "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/vote-network.bna",

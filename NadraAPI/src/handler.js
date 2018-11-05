@@ -11,42 +11,42 @@ const models = [
     {
         nic: '2345678901234',
         name: 'Hamza',
-        constituency: 'Gulshan',
+        constituency: 'Johar',
         gender: 'Male',
         dob: new Date(1980, 1, 1)
     },
     {
         nic: '3456789012345',
         name: 'Farrukh',
-        constituency: 'Gulshan',
+        constituency: 'Defense',
         gender: 'Male',
         dob: new Date(1980, 1, 1)
     },
     {
         nic: '4567890123456',
         name: 'Aamir',
-        constituency: 'Korangi',
+        constituency: 'Gulshan',
         gender: 'Male',
         dob: new Date(1980, 1, 1)
     },
     {
         nic: '5678901234567',
         name: 'Sumail',
-        constituency: 'Nazimabad',
+        constituency: 'Hyderi',
         gender: 'Male',
         dob: new Date(1980, 1, 1)
     },
     {
         nic: '6789012345678',
         name: 'Shumaila',
-        constituency: 'Defence',
+        constituency: 'Johar',
         gender: 'Female',
         dob: new Date(1980, 1, 1)
     },
     {
         nic: '7890123456789',
         name: 'Samra',
-        constituency: 'Clifton',
+        constituency: 'Defense',
         gender: 'Female',
         dob: new Date(1980, 1, 1)
     },
@@ -60,14 +60,14 @@ const models = [
     {
         nic: '9012345678901',
         name: 'Safa',
-        constituency: 'Nazimabad',
+        constituency: 'Hyderi',
         gender: 'Female',
         dob: new Date(1980, 1, 1)
     },
     {
         nic: '0123456789012',
         name: 'Sehar',
-        constituency: 'Lyari',
+        constituency: 'Malir',
         gender: 'Female',
         dob: new Date(1980, 1, 1)
     },

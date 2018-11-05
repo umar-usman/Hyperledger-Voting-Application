@@ -1,7 +1,7 @@
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {Component, Inject} from '@angular/core';
-import {DataService} from '../../services/data.service';
-import {FormControl, Validators} from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { Component, Inject } from '@angular/core';
+import { DataService } from '../../services/data.service';
+import { FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AddEditDialogComponent {
 
   constructor(public dialogRef: MatDialogRef<AddEditDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) private data: any, private dataService: DataService, private toastrService: ToastrService) { }
+    @Inject(MAT_DIALOG_DATA) private data: any, private dataService: DataService, private toastrService: ToastrService) { }
 
   formControl = new FormControl('', [
     Validators.required
@@ -32,7 +32,7 @@ export class AddEditDialogComponent {
       this.dialogRef.close(true);
     }, error => {
       this.toastrService.error(error.error.error.message, 'Add!');
-    });    
+    });
   }
 
   onNoClick(): void {

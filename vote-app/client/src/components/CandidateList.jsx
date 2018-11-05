@@ -23,7 +23,6 @@ export class CandidateList extends React.Component {
       transactionId: '',
       constituency: localStorage.getItem('constituency')
     };
-    //  console.log(props.data.votedFor)
   }
   componentDidMount() {
     animation();
@@ -125,39 +124,58 @@ export class CandidateList extends React.Component {
   _renderCandidate() {
     // option for the loader
     var options = {
-      lines: 13,
-      length: 5,
-      width: 3,
-      radius: 10,
-      scale: 1.00,
-      corners: 1,
-      color: '#fff',
-      opacity: 0.25,
-      rotate: 0,
-      direction: 1,
-      speed: 1,
-      trail: 60,
-      fps: 20,
-      zIndex: 2e9,
-      shadow: false,
-      hwaccel: false,
-      position: 'absolute'
+      'lines': 13,
+      'length': 5,
+      'width': 3,
+      'radius': 10,
+      'scale': 1.00,
+      'corners': 1,
+      'color': '#fff',
+      'opacity': 0.25,
+      'rotate': 0,
+      'direction': 1,
+      'speed': 1,
+      'trail': 60,
+      'fps': 20,
+      'zIndex': 2e9,
+      'shadow': false,
+      'hwaccel': false,
+      'position': 'absolute'
     };
+    const flexStyle = {
+      'display': 'flex'
+    }
+    const imgStyle = {
+      'width': '40px'
+    }
+    const nameStyle = {
+      'width': '200px'
+    }
+    const voteStyle = {
+      'width': '-webkit-fill-available',
+      'text-align': 'right'
+    }
     const _this = this;
     // map and render candidate with button , votes , name
     return _.map((this.state.candidates), function (v, k) {
-      let img = "/img/" + v.name + ".png";
+      //debugger;
+      let candidateImg = "url(./img/" + v.name + ".png)";
+      v.name = v.name.replace('_', ' ');
+      const symbolImg = "./img/" + v.symbol + ".png";
       return (<div className="col text-center candidate mb-4" key={k}>
         <div className={'img-block'} style={{
-          backgroundImage: "url(./img/" + v.name + ".png)"
+          'background-image': candidateImg
         }}>
           <div className={"hover " + _this._votedFor(v.name) + " " + _this.state.voted + " " + (!_this.state.voteLoaded ? 'loading' : '')}>
             <Loader loaded={_this.state.voteLoaded} options={options} className="spinner">{_this._renderVoteBtn(v)}</Loader>
           </div>
         </div>
-        <h2 className="text-light text-uppercase text-left mb-0">{v.name}
-          <small className="float-right mt-2">{v.votes}</small>
-        </h2>
+        <div className="d-flex">
+          <div className="mr-2"><img src={symbolImg} style={imgStyle} /></div>
+          <h2 className="text-light mb-0">{v.name}
+          </h2>
+          <h2 className="text-light mt-0 ml-auto">{v.votes}</h2>
+        </div>
         <hr className="bg-light py-1 mt-0" />
       </div>)
     })
@@ -186,11 +204,18 @@ export class CandidateList extends React.Component {
       hwaccel: false,
       position: 'absolute'
     };
+    const noCandidatesStyle = {
+      'color': 'white',
+      'font-weight': 'bold',
+      'text-align': 'center',
+      'font-family': 'monospace',
+      'width': '-webkit-fill-available'
+    }
     return (<div className="candidates-list my-4">
       <Loader loaded={this.state.candidatesLoaded} options={options} className="spinner">
         <div className="container">
           <div className="row">
-            {this._renderCandidate()}
+            {this.state.candidates.length > 0 ? this._renderCandidate() : <h1 style={noCandidatesStyle}> NO CANDIDATES RUNNING IN YOUR CONSTITUENCY </h1>}
           </div>
           <div className="row justify-content-between text-light tx">
             <div className={(!this.state.transactionId) ? 'd-none' : 'col-sm'}>

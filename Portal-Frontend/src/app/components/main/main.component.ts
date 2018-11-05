@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {DataService} from '../../services/data.service';
+import { Component, OnInit } from '@angular/core';
+import { DataService } from '../../services/data.service';
 import { Router } from '@angular/router';
 import { CandidateWithVote, Auth, Candidate } from '../../../../src/app/models/candidate';
 import { MatTableDataSource, MatDialog } from '@angular/material';
@@ -23,20 +23,17 @@ export class MainComponent implements OnInit {
 
   constructor(private router: Router, private dataService: DataService, public dialog: MatDialog, private toastrService: ToastrService) { }
 
-  ngOnInit(){
-    if(this.dataService.isLoggedIn() == false)
-    {
-       this.router.navigateByUrl('login');
-       return;
+  ngOnInit() {
+    if (this.dataService.isLoggedIn() == false) {
+      this.router.navigateByUrl('login');
+      return;
     }
-
     this.authData = this.dataService.getAuthData();
 
     this.dataService.getRegions().subscribe((regions) => {
       this.regions = regions;
 
-      if(this.authData.is_admin == false)
-      {
+      if (this.authData.is_admin == false) {
         this.selectedRegion = this.authData.constituency;
 
         this.dataService.getCandidate(this.authData.id).subscribe((result) => {
@@ -50,32 +47,31 @@ export class MainComponent implements OnInit {
     });
   }
 
-  refreshData(){
-    if(!this.selectedRegion)
+  refreshData() {
+    if (!this.selectedRegion)
       this.candidates = [];
-    else
-      {
-        this.dataService.getAll(this.selectedRegion).subscribe((candidates) => {
-          this.candidates = candidates;
-          this.dataSource = new MatTableDataSource(this.candidates);
-        });
-      }
+    else {
+      this.dataService.getAll(this.selectedRegion).subscribe((candidates) => {
+        this.candidates = candidates;
+        this.dataSource = new MatTableDataSource(this.candidates);
+      });
+    }
   }
 
-  logout(){
+  logout() {
     this.dataService.logout();
     this.router.navigateByUrl('login');
   }
 
   delete(id: string, name: string) {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: {id: id, name: name}
+      data: { id: id, name: name }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.toastrService.success('Operation Successful', 'Delete!');
-          this.refreshData();
+        this.refreshData();
       }
     }, error => {
       this.toastrService.error('Operation Failed', 'Delete!');
@@ -109,13 +105,13 @@ export class MainComponent implements OnInit {
     obj.symbol = '';
     obj.constituency = '';
     const dialogRef = this.dialog.open(AddEditDialogComponent, {
-      data: {model: obj, regions: this.regions}
+      data: { model: obj, regions: this.regions }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         //this.dataService.add(result).subscribe(()=> {
-          this.refreshData();
+        this.refreshData();
         //});
       }
     });

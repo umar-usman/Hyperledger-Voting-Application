@@ -25,7 +25,7 @@ enum Symbols {
   o TIGER
   o BAT
   o ARROW
-  o BOOK
+  o CRANE
 }
 
 transaction MakeVote {

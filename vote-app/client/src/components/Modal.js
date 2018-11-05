@@ -61,11 +61,9 @@ class TransactionDetailModal extends React.Component {
     render() {
         return (
             <div>
-                <button className="btn btn-primary" onClick={() => {
-                    if (this.props.transactionId) {
-                        this.openModal(this.props.transactionId)
-                    }
-                }}>Vote Details</button>
+                {this.props.transactionId ? <button className="btn btn-primary" onClick={() => {
+                    this.openModal(this.props.transactionId)
+                }}>Vote Details</button> : ''}
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}

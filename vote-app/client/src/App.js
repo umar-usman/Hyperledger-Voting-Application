@@ -5,6 +5,13 @@ import {Register} from './components/Register.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 class App extends Component {
   render() {
+    const style = {
+      'color': 'white',
+      'font-weight': 'bold',
+      'font-family': 'monospace',
+      'font-size': '-webkit-xxx-large',
+      'width': '-webkit-fill-available'
+    }
     return (
       <div className="App">
         <div className="container">

@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="signOutStyle">
     <mat-form-field *ngIf="authData && authData.is_admin">
         <mat-select (selectionChange)="refreshData()" [(value)]="selectedRegion" placeholder="Select Region">
             <mat-option *ngFor="let region of regions" [value]="region">
@@ -6,49 +6,61 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
-    <span class="spacer"></span>
-    <span *ngIf="candidate">Name: {{candidate.name}}</span><span class="spacer"></span>
-    <span *ngIf="candidate">Region: {{selectedRegion}}</span><span class="spacer"></span>
-    <span *ngIf="candidate">Symbol: {{candidate.symbol}}</span><span class="spacer"></span>
-    <span class="spacer"></span>
-    Reload data:
-    <button mat-icon-button (click)="refreshData()">
-        <mat-icon>refresh</mat-icon>
-    </button>
-    <button mat-stroked-button (click)="logout()" >Logout</button>
+    <div>
+        <span>Reload data:</span>
+        <button mat-icon-button (click)="refreshData()">
+            <mat-icon>refresh</mat-icon>
+        </button>
+        <button mat-stroked-button (click)="logout()">Logout</button>
+    </div>
+
 </mat-toolbar>
-<div>
-    <mat-card class="card-result" *ngFor="let candidate of candidates | orderBy: ['-votes']">{{candidate.name}}<br />{{candidate.votes}}</mat-card>
+<span *ngIf="authData.is_admin === false">
+
+    <div class="Row">
+        <div class="Column">
+            <mat-card *ngIf="candidate">Name: {{candidate.name}}</mat-card>
+        </div>
+        <div class="Column">
+            <mat-card *ngIf="candidate">Region: {{selectedRegion}}</mat-card>
+        </div>
+        <div class="Column">
+            <mat-card *ngIf="candidate">Symbol: {{candidate.symbol}}</mat-card>
+        </div>
+        <div class="Column">
+            <mat-card *ngIf="candidate">Votes: {{candidate.votes}}</mat-card>
+        </div>
+    </div>
+</span>
+<div *ngIf="authData.is_admin === true">
+    <mat-card class="card-result" *ngFor="let candidate of candidates | orderBy: ['-votes']">{{candidate.name}}
+        <br />{{candidate.votes}}</mat-card>
 </div>
 <div *ngIf="selectedRegion && authData && authData.is_admin" style="clear:both" class="container mat-elevation-z8">
 
     <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
 
-        <ng-container matColumnDef="candidateId">
+        <ng-container matColumnDef="candidateId" *ngIf="authData.is_admin === true">
             <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
             <mat-cell *matCellDef="let row">{{row.candidateId}}</mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="name">
+        <ng-container matColumnDef="name" *ngIf="authData.is_admin === true">
             <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
             <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="symbol">
+        <ng-container matColumnDef="symbol" *ngIf="authData.is_admin === true">
             <mat-header-cell *matHeaderCellDef>Symbol</mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row.symbol}}</mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="actions">
+        <ng-container matColumnDef="actions" *ngIf="authData.is_admin === true">
             <mat-header-cell *matHeaderCellDef>
-                <button mat-raised-button color="primary" (click)="addNew()">Add</button>
+                <!-- <button mat-raised-button color="primary" (click)="addNew()">Add</button> -->
             </mat-header-cell>
 
             <mat-cell *matCellDef="let row; let i=index;">
-                <!-- <button mat-icon-button color="accent" (click)="startEdit(row)">
-                    <mat-icon aria-label="Edit">edit</mat-icon>
-                </button> -->
-
                 <button mat-icon-button color="accent" (click)="delete(row.candidateId, row.name)">
                     <mat-icon aria-label="Delete">delete</mat-icon>
                 </button>
@@ -64,3 +76,7 @@
         No results
     </div>
 </div>
+
+<mat-card *ngIf="authData.is_admin === true">
+    <button mat-raised-button color="primary" (click)="addNew()">Add</button>
+</mat-card>

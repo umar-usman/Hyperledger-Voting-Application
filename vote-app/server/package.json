@@ -4,6 +4,7 @@
   "description": "vote server side app",
   "main": "index.js",
   "scripts": {
+    "watch": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Umar Usman",
