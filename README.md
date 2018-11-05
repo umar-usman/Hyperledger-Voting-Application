@@ -41,13 +41,13 @@ export FABRIC_VERSION=hlfv12
 
 `2- composer card create -p connection.json -u PeerAdmin -c admincerts/Admin@org1.example.com-cert.pem -k keystore/114aab0e76bf0c78308f89efc4b8c9423e31568da0c340ca187a9b17aa9a4457_sk -r PeerAdmin -r ChannelAdmin`
 
-`3- composer card import -f PeerAdmin@hlfv1`
+`3- composer card import -f admin@hyperledervotingapp.card`
 
-`4- composer network install -c PeerAdmin@hlfv1 -a ~/Documents/votingApp/HyperLedger-Voting-Dapp/Hyperledger-Composer/vote-network/vote-network@1.0.0.bna`
+`4- composer network install -c PeerAdmin@hlfv1 -a [path to repo]/vote-network/hyperledervotingapp@1.0.0.bna`
 
-`5- composer network start --networkName vote-network --networkVersion 0.0.7 -A admin -S adminpw -c PeerAdmin@hlfv1`
+`5- composer network start --networkName hyperledervotingapp --networkVersion 1.0.0 -A admin -S adminpw -c PeerAdmin@hlfv1`
 
-`6- composer-rest-server -c admin@vote-network -n never -w true`
+`6- composer-rest-server -c admin@hyperledervotingapp -n never -w true`
 
 # Running Nadra API: 
 
