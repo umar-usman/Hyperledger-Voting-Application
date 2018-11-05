@@ -21,7 +21,9 @@ In the real world scenario, actual Nadra API can be used to serve this task.
 # Installing pre-requisites:
 
 `1- https://hyperledger.github.io/composer/latest/installing/installing-prereqs.html`
+
 `2- https://hyperledger.github.io/composer/latest/installing/development-tools.html`
+
 `3- https://hyperledger.github.io/composer/latest/tutorials/deploy-to-fabric-single-org`
 On 3rd link, jump to `Step Four: Locating the certificate and private key for the Hyperledger Fabric administrator`
 
